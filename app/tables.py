@@ -57,6 +57,9 @@ class Credit(db.Model):
     credits     = db.Column(db.Integer)
     expireDate  = db.Column(db.DateTime)
 
+    user        = db.relationship('User', foreign_keys=id_user)
+    activity    = db.relationship('Activity', foreign_keys=id_activity)
+
     def __init__(self, id, id_user, id_activity, credits, expireDate=None):
         self.id_user     = id_user
         self.id_activity = id_activity
@@ -77,6 +80,8 @@ class Appointment(db.Model):
     initHour    = db.Column(db.DateTime)
     endHour     = db.Column(db.DateTime)
 
+    activity    = db.relationship('Activity', foreign_keys=id_activity)
+
     def __init__(self, id, id_activity, initHour, endHour=None):
         self.id_activity = id_activity
         self.initHour    = initHour
@@ -90,4 +95,8 @@ class Participant(db.Model):
     id              = db.Column(db.Integer, primary_key=True)
     id_activity = db.Column(db.Integer, db.ForeignKey('activities.id'))
     id_user     = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    activity    = db.relationship('Activity', foreign_keys=id_activity)
+    user        = db.relationship('User', foreign_keys=id_user)
+
 
