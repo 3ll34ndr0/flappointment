@@ -23,7 +23,7 @@ class Activity(db.Model):
     __tablename__ = "activities"
     id          = db.Column(db.Integer, primary_key=True)
     name        = db.Column(db.Text)
-    manager     = db.Column(db.Integer, db.ForeignKey('users.id'))
+    id_manager     = db.Column(db.Integer, db.ForeignKey('users.id'))
     quota       = db.Column(db.Integer)
     description = db.Column(db.Text)
     vCalendar   = db.Column(db.Text)
@@ -31,6 +31,8 @@ class Activity(db.Model):
     weekly      = db.Column(db.Text)
     monthly     = db.Column(db.Text)
     wdays       = db.Column(db.Text) #Yes or not, that must be defined elsewhere (working days)
+
+    manager     = db.relationship('User', foreign_keys=id_manager)
 
     def __init__(self, name, manager, quota=None, description=None,
                  vCalendar=None,dayly=None, weekly=None, monthly=None,
