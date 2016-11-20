@@ -112,24 +112,12 @@ class Participant(db.Model):
 
 
 class MakeAppointment(db.Model):
-    __tablename__ = 'makeappointment'
-    id_activity = db.Column(db.Integer, db.ForeignKey('activities.id'), primary_key=True)
-    id_user     = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    __tablename__  = 'makeappointment'
+    id_appointment = db.Column(db.Integer, db.ForeignKey('appointments.id'), primary_key=True)
+    id_user        = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
 
     def __init__(self, user):
         self.user    = user
 
     user = db.relationship(User, lazy='joined')
-
-
-
-#class MakeAppointment(Base):
-#    __tablename__ = 'makeappointment'
-#    activity_id = Column(Integer, ForeignKey('activity.activity_id'), primary_key=True)
-#    user_id = Column(Integer, ForeignKey('user.user_id'), primary_key=True)
-
-#    def __init__(self, user):
-#        self.user = user
-#    user = relationship(User, lazy='joined')
-
 
