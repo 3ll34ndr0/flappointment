@@ -23,8 +23,8 @@ class Activity(db.Model):
     __tablename__ = "activities"
     id          = db.Column(db.Integer, primary_key=True)
     name        = db.Column(db.Text)
-    id_manager     = db.Column(db.Integer, db.ForeignKey('users.id'))
-    inscriptos  = relationship("Appointment", cascade="all, delete-orphan",backref='order')
+    id_manager  = db.Column(db.Integer, db.ForeignKey('users.id'))
+    inscriptos  = db.relationship("Appointment", cascade="all, delete-orphan",backref='order')
     quota       = db.Column(db.Integer)
     description = db.Column(db.Text)
     vCalendar   = db.Column(db.Text)
