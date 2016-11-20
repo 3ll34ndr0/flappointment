@@ -24,9 +24,6 @@ class Activity(db.Model):
     id          = db.Column(db.Integer, primary_key=True)
     name        = db.Column(db.Text)
     id_manager  = db.Column(db.Integer, db.ForeignKey('users.id'))
-#    inscriptos  = db.relationship("MakeAppointment", cascade="all, delete-orphan",backref='activities')
-#    inscriptos  = db.relationship("MakeAppointment", cascade="all, delete-orphan",
-#                            backref='activity')
     quota       = db.Column(db.Integer)
     description = db.Column(db.Text)
     vCalendar   = db.Column(db.Text)
@@ -85,10 +82,6 @@ class Appointment(db.Model):
     initHour    = db.Column(db.DateTime)
     endHour     = db.Column(db.DateTime)
     activity    = db.relationship('Activity', foreign_keys=id_activity)
-#    inscriptos   = db.relationship('MakeAppointment',
-#                                   backref=db.backref('inscritos', lazy='dynamic'))
-    inscriptos  = db.relationship("MakeAppointment", cascade="all, delete-orphan",backref='appointments')
-
 
     def __init__(self, id, id_activity, initHour, endHour=None):
         self.id_activity = id_activity
@@ -111,13 +104,13 @@ class Participant(db.Model):
     user        = db.relationship('User', foreign_keys=id_user)
 
 
-class MakeAppointment(db.Model):
-    __tablename__  = 'makeappointment'
-    id_appointment = db.Column(db.Integer, db.ForeignKey('appointments.id'), primary_key=True)
-    id_user        = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
-
-    def __init__(self, user):
-        self.user    = user
-
-    user = db.relationship(User, lazy='joined')
+#class MakeAppointment(db.Model):
+##    __tablename__  = 'makeappointment'
+#    id_appointment = db.Column(db.Integer, db.ForeignKey('appointments.id'), primary_key=True)
+#    id_user        = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+#
+#    def __init__(self, user):
+#        self.user    = user
+#
+#    user = db.relationship(User, lazy='joined')
 
