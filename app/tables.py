@@ -24,6 +24,7 @@ class Activity(db.Model):
     id          = db.Column(db.Integer, primary_key=True)
     name        = db.Column(db.Text)
     id_manager     = db.Column(db.Integer, db.ForeignKey('users.id'))
+    inscriptos  = relationship("Appointment", cascade="all, delete-orphan",backref='order')
     quota       = db.Column(db.Integer)
     description = db.Column(db.Text)
     vCalendar   = db.Column(db.Text)
@@ -102,3 +103,12 @@ class Participant(db.Model):
     user        = db.relationship('User', foreign_keys=id_user)
 
 
+class MakeAppointment(db.Model):
+    __tablename__ = 'makeappointment'
+    id_activity = db.Column(Integer, ForeignKey('activities.id'), primary_key=True)
+    id_user     = db.Column(Integer, ForeignKey('users.id'), primary_key=True)
+
+    def __init__(self, user):
+        self.user    = user
+
+    user = relationship(User, lazy='joined')
