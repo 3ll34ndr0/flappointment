@@ -105,8 +105,8 @@ class Participant(db.Model):
 
 class MakeAppointment(db.Model):
     __tablename__ = 'makeappointment'
-    id_activity = db.Column(Integer, ForeignKey('activities.id'), primary_key=True)
-    id_user     = db.Column(Integer, ForeignKey('users.id'), primary_key=True)
+    id_activity = db.Column(db.Integer, ForeignKey('activities.id'), primary_key=True)
+    id_user     = db.Column(db.Integer, ForeignKey('users.id'), primary_key=True)
 
     def __init__(self, user):
         self.user    = user
