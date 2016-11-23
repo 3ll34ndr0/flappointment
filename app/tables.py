@@ -104,13 +104,13 @@ class Participant(db.Model):
     user        = db.relationship('User', foreign_keys=id_user)
 
 
-#class MakeAppointment(db.Model):
-##    __tablename__  = 'makeappointment'
-#    id_appointment = db.Column(db.Integer, db.ForeignKey('appointments.id'), primary_key=True)
-#    id_user        = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
-#
-#    def __init__(self, user):
-#        self.user    = user
-#
-#    user = db.relationship(User, lazy='joined')
+class MakeAppointment(db.Model):
+    __tablename__  = 'makeappointment'
+    id_appointment = db.Column(db.Integer, db.ForeignKey('appointments.id'), primary_key=True)
+    id_user        = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+
+    def __init__(self, user):
+        self.user    = user
+
+    user = db.relationship(User, lazy='joined')
 
