@@ -83,8 +83,8 @@ class Appointment(db.Model):
     endHour     = db.Column(db.DateTime)
     activity    = db.relationship('Activity', foreign_keys=id_activity)
 
-    def __init__(self, id, id_activity, initHour, endHour=None):
-        self.id_activity = id_activity
+    def __init__(self, id, activity, initHour, endHour=None):
+        self.id_activity = activity
         self.initHour    = initHour
         self.endHour     = endHour
     def __repr__(self):
