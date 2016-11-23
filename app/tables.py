@@ -34,10 +34,10 @@ class Activity(db.Model):
 
     manager     = db.relationship('User', foreign_keys=id_manager)
 
-    def __init__(self, name, manager, quota=None, description=None,
+    def __init__(self, name, id_manager, quota=None, description=None,
                  vCalendar=None,dayly=None, weekly=None, monthly=None,
                  wdays=None):
-        self.name        = name
+        self.name        = name or self.name
         self.manager     = manager
         self.quota       = quota
         self.description = description
