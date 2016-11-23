@@ -62,9 +62,9 @@ class Credit(db.Model):
     user        = db.relationship('User', foreign_keys=id_user)
     activity    = db.relationship('Activity', foreign_keys=id_activity)
 
-    def __init__(self, id, id_user, id_activity, credits, expireDate=None):
-        self.id_user     = id_user
-        self.id_activity = id_activity
+    def __init__(self, user, activity, credits, expireDate=None):
+        self.id_user     = user
+        self.id_activity = activity
         self.credits     = credits
         if expireDate is None:
             expireDate = datetime.utcnow() + timedelta(days=30)
@@ -83,7 +83,7 @@ class Appointment(db.Model):
     endHour     = db.Column(db.DateTime)
     activity    = db.relationship('Activity', foreign_keys=id_activity)
 
-    def __init__(self, id, activity, initHour, endHour=None):
+    def __init__(self, activity, initHour, endHour=None):
         self.id_activity = activity
         self.initHour    = initHour
         self.endHour     = endHour
