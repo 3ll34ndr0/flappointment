@@ -109,6 +109,9 @@ class MakeAppointment(db.Model):
     id_appointment = db.Column(db.Integer, db.ForeignKey('appointments.id'), primary_key=True)
     id_user        = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
 
+    appointment    = db.relationship('Appointment', foreign_keys=id_appointment)
+
+
     def __init__(self, user):
         self.user    = user
 
