@@ -82,6 +82,7 @@ class Appointment(db.Model):
     initHour    = db.Column(db.DateTime)
     endHour     = db.Column(db.DateTime)
     activity    = db.relationship('Activity', foreign_keys=id_activity)
+    users       = relationship("MakeAppointment", cascade="all, delete-orphan", backref='appointment')
 
     def __init__(self, activity, initHour, endHour=None):
         self.activity = activity
@@ -108,9 +109,6 @@ class MakeAppointment(db.Model):
     __tablename__  = 'makeappointment'
     id_appointment = db.Column(db.Integer, db.ForeignKey('appointments.id'), primary_key=True)
     id_user        = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
-
-    appointment    = db.relationship('Appointment', foreign_keys=id_appointment)
-
 
     def __init__(self, user):
         self.user    = user
