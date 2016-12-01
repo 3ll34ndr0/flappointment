@@ -48,7 +48,7 @@ class Activity(db.Model):
         self.wdays       = wdays
 
     def __repr__(self):
-        return "<Activity %r>" % self.name
+        return self.name
 
 
 class Credit(db.Model):
