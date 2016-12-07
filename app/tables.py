@@ -89,7 +89,7 @@ class Appointment(db.Model):
         self.initHour    = initHour
         self.endHour     = endHour
     def __repr__(self):
-        return "*{}*: {}>".format(self.activity.name, self.initHour)
+        return "*{}*: {}".format(self.activity.name, self.initHour)
     #TODO: Lear how to show the name of the id_activity..."
 
 
