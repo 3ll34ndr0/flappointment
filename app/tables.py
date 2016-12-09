@@ -31,7 +31,7 @@ class Activity(db.Model):
     weekly      = db.Column(db.Text)
     monthly     = db.Column(db.Text)
     wdays       = db.Column(db.Text) #Yes or not, that must be defined elsewhere (working days)
-    prePay      = db.Column(db.Bool)
+    prePay      = db.Column(db.Boolean)
     """
     if enabled, user needs to buy some credit before booking an appointment
     """
