@@ -115,6 +115,6 @@ class MakeAppointment(db.Model):
 #        self.appointment = appointment #nuevo a probar
 
     user = db.relationship(User, lazy='joined')
-#    appointment = db.relationship(Appointment, lazy='joined') #nuevo a probar
+    appointment = db.relationship(Appointment, lazy='joined') #nuevo a probar
 
 
