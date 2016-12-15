@@ -112,7 +112,7 @@ class MakeAppointment(db.Model):
 
     def __init__(self, user):
         self.user    = user
-#        self.appointment = appointment #nuevo a probar
+        self.appointment = appointment #nuevo a probar
 
     user = db.relationship(User, lazy='joined')
     appointment = db.relationship(Appointment, lazy='joined') #nuevo a probar
