@@ -27,16 +27,21 @@ class Activity(db.Model):
     quota       = db.Column(db.Integer)
     description = db.Column(db.Text)
     vCalendar   = db.Column(db.Text)
-    dayly       = db.Column(db.Text)
-    weekly      = db.Column(db.Text)
-    monthly     = db.Column(db.Text)
-    wdays       = db.Column(db.Text) #Yes or not, that must be defined elsewhere (working days)
+    dayly       = db.Column(db.Boolean)
+    weekly      = db.Column(db.Boolean)
+    monthly     = db.Column(db.Boolean)
+    wdays       = db.Column(db.Boolean) # If True, which days must be defined elsewhere (working days)
+    prePay      = db.Column(db.Boolean)
+    """
+    if enabled, user needs to buy some credit before booking an appointment. It
+    is disabled by default.
+    """
 
     manager     = db.relationship('User', foreign_keys=id_manager)
 
     def __init__(self, name, manager, quota=None, description=None,
-                 vCalendar=None,dayly=None, weekly=None, monthly=None,
-                 wdays=None):
+                 vCalendar=None,dayly=False, weekly=None, monthly=None,
+                 wdays=False, prePay=False):
         self.name        = name or self.name
         self.manager     = manager
         self.quota       = quota
@@ -46,6 +51,7 @@ class Activity(db.Model):
         self.weekly      = weekly
         self.monthly     = monthly
         self.wdays       = wdays
+        self.prePay      = prePay
 
     def __repr__(self):
         return self.name
@@ -89,7 +95,7 @@ class Appointment(db.Model):
         self.initHour    = initHour
         self.endHour     = endHour
     def __repr__(self):
-        return "<Appointment: {} at {}>".format(self.activity.name, self.initHour)
+        return "*{}*: {}".format(self.activity.name, self.initHour.strftime("%d %h %H:%M"))
     #TODO: Lear how to show the name of the id_activity..."
 
 
@@ -112,9 +118,6 @@ class MakeAppointment(db.Model):
 
     def __init__(self, user):
         self.user    = user
-        self.appointment = appointment #nuevo a probar
 
     user = db.relationship(User, lazy='joined')
-    appointment = db.relationship(Appointment, lazy='joined') #nuevo a probar
-
 
